@@ -6,7 +6,8 @@
   "main": "bin/index.js",
   "typings": "bin/index",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "gulp build",
+    "test": "gulp test"
   },
   "repository": {
     "type": "git",
@@ -23,5 +24,17 @@
   },
   "dependencies": {
     "ws": "^1.0.1"
+  },
+  "devDependencies": {
+    "del": "^2.2.0",
+    "gulp": "^3.9.0",
+    "gulp-jasmine": "^2.2.1",
+    "gulp-tslint": "^4.3.0",
+    "gulp-typescript": "^2.10.0",
+    "jasmine-core": "2.4.1",
+    "jasmine-spec-reporter": "^2.4.0",
+    "tslint": "^3.2.1",
+    "tslint-stylish": "^2.1.0-beta",
+    "typescript": "^1.7.5"
   }
 }
