@@ -1,8 +1,24 @@
+---
 language: node_js
 
 node_js:
-  - 'stable'
+  - "5"
+
+sudo: false
+
+cache:
+  directories:
+    - node_modules
+
+before_install:
+  - "npm config set spin false"
+  - "npm --version"
+
+install:
+  - "npm install"
 
 before_script:
   - npm install -g gulp
+  - npm install -g tsd
+  
 script: gulp

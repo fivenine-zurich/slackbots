@@ -23,6 +23,7 @@
     "url": "https://github.com/fiveninedigital/slackbots/issues"
   },
   "dependencies": {
+    "es6-promise": "^3.0.2",
     "ws": "^1.0.1"
   },
   "devDependencies": {
@@ -33,6 +34,7 @@
     "gulp-typescript": "^2.10.0",
     "jasmine-core": "2.4.1",
     "jasmine-spec-reporter": "^2.4.0",
+    "request": "^2.67.0",
     "tslint": "^3.2.1",
     "tslint-stylish": "^2.1.0-beta",
     "typescript": "^1.7.5"
