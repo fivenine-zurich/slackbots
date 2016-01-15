@@ -72,7 +72,7 @@ gulp.task(tasks.test, [tasks.build], function (done) {
         isVerbose: true
     });
     
-    return gulp.src('bin/tests/**.spec.js')
+    return gulp.src(['bin/tests/*.spec.js', 'bin/tests/**/*.spec.js'])
         .pipe(jasmine({
 			reporter: reporter
 		}));

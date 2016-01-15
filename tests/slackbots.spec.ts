@@ -9,7 +9,13 @@ describe('SlackBots tests', () => {
     
     it('Ensure that login fails with no API-key', () => {
         expect(() => {
-            bot = new SlackBots('notoken', 'test-bot');    
+            bot = new SlackBots(undefined, 'test-bot');    
+        }).toThrow();
+    });
+    
+    it('Ensure that login fails with an invalid API-key', () => {
+        expect(() => {
+            bot = new SlackBots('this api key is invalid', 'test-bot');    
         }).toThrow();
     });
 });
