@@ -9,6 +9,8 @@ var Reporter = require('jasmine-spec-reporter');
 var tslint = require('gulp-tslint');
 var stylish = require('tslint-stylish');
 
+var tsd = require('gulp-tsd');
+
 var serverOptions = {
 	root: '',
 	port: 8000,
@@ -18,6 +20,7 @@ var serverOptions = {
 var tasks = {
 	defaultTask: 'default',
     lint: 'lint',
+    tsd: 'tsd',
 	build: 'build',
 	clean: 'clean',
 	watch: 'watch',
@@ -26,6 +29,13 @@ var tasks = {
 };
 
 gulp.task(tasks.defaultTask, [tasks.build] );
+
+gulp.task(tasks.tsd, function(callback) {
+    tsd({
+        command: 'reinstall',
+        config: './tsd.json'
+    }, callback);
+});
 
 gulp.task(tasks.lint, function() {
     
@@ -39,7 +49,7 @@ gulp.task(tasks.lint, function() {
         }));
 });
 
-gulp.task(tasks.build, [tasks.lint], function() {
+gulp.task(tasks.build, [tasks.tsd, tasks.lint], function() {
     
     var tsProject = ts.createProject('tsconfig.json', {
         typescript: require('typescript')
