@@ -73,4 +73,24 @@ describe('API call tests', () => {
             .catch(failTest())
             .finally(done);
     });
+    
+    it('Ensure that API response returns okay if the call succeeds', (done) => {
+        spyOn(Request, 'post').and.callFake((data: any, callback: Request.RequestCallback) => {
+            let response: string = JSON.stringify({
+                ok: true,
+                error: undefined,
+            });
+            
+            callback(undefined, undefined, response);
+        });
+                
+        bot = new SlackBots('Whatever', 'test-bot');
+        
+        bot.start()
+            .then((result) => {
+                expect(result.ok);
+            })
+            .catch(failTest())
+            .finally(done);
+    });
 });

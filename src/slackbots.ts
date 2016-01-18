@@ -51,10 +51,7 @@ export class SlackBots {
         return new Promise<ISlackApiResponse>((resolve, reject) => {
             
             this.callApi('rtm.start').then((response) => {
-                
-                console.log('Respose recieved');
                 resolve(response);
-                
             }).catch((err) => {
                 reject(err);
             });
