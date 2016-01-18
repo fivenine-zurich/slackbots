@@ -8,6 +8,7 @@
         "preserveConstEnums": true,
         "declaration": true,
         "suppressImplicitAnyIndexErrors": true,
+        "sourceMap": true,
         "outDir": "./bin"
     },
         "exclude": [
