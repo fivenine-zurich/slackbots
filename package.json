@@ -8,7 +8,8 @@
   "scripts": {
     "build": "gulp build",
     "test": "gulp test",
-    "cover": "./node_modules/istanbul/lib/cli.js cover gulp --root ./bin --include-all-sources --dir ./bin/cover/ -- test -R spec"
+    "cover": "./node_modules/istanbul/lib/cli.js cover gulp --root ./bin -x ./bin/cover --include-all-sources --dir ./bin/cover/ -- test -R spec",
+    "travis": "gulp test && ./node_modules/istanbul/lib/cli.js cover gulp -x gulpfile.js --include-all-sources --dir ./bin/cover/ -- test -R spec"
   },
   "repository": {
     "type": "git",
@@ -29,6 +30,7 @@
     "ws": "^1.0.1"
   },
   "devDependencies": {
+    "coveralls": "^2.11.6",
     "del": "^2.2.0",
     "dotenv": "^1.2.0",
     "gulp": "^3.9.0",

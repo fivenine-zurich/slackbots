@@ -17,4 +17,7 @@ before_install:
 install:
   - "npm install"
   
-script: gulp
+script: gulp travis
+
+# Send coverage data to Coveralls
+after_script: "cat ./bin/coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"

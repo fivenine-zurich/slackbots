@@ -4,6 +4,7 @@ var del = require('del');
 var jasmine = require('gulp-jasmine');
 var typescript = require('typescript');
 var plumber = require('gulp-plumber');
+var sourcemaps = require('gulp-sourcemaps');
 
 var Reporter = require('jasmine-spec-reporter');
 
@@ -44,7 +45,6 @@ gulp.task(tasks.lint, function() {
     
     return gulp.src('src/**.ts')
         .pipe(tslint())
-        .pipe(tslint())
         .pipe(tslint.report(stylish, {
             emitError: false,
             sort: true,
@@ -59,17 +59,20 @@ gulp.task(tasks.build, [tasks.tsd, tasks.lint], function() {
     }); 
     
 	var tsResult = tsProject.src()
+        .pipe(sourcemaps.init())
         .pipe(plumber())
 		.pipe(ts(tsProject));
 	
-	return tsResult.js.pipe(gulp.dest('bin'));
+	return tsResult.js
+        .pipe(sourcemaps.write('.'))
+        .pipe(gulp.dest('bin'));
 });
 
 gulp.task(tasks.clean, function () {
 	return del(['bin/']);
 });
 
-gulp.task(tasks.test, [tasks.build], function (done) {
+gulp.task(tasks.test, function (done) {
     
     var reporter = new Reporter({
         showColors: true,
