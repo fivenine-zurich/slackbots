@@ -13,8 +13,6 @@ var stylish = require('tslint-stylish');
 
 var tsd = require('gulp-tsd');
 
-var remapIstanbul = require('remap-istanbul/lib/gulpRemapIstanbul');
-
 var serverOptions = {
 	root: '',
 	port: 8000,
