@@ -26,7 +26,7 @@ export interface ISlackApiResponse {
     error?: string;
 }
 
-export default class SlackBots {
+export class SlackBots {
     
     private token: string;
     private name: string;
@@ -65,20 +65,21 @@ export default class SlackBots {
         
         let uri: string = 'https://slack.com/api/' + methodName;
         
-        return new Promise<any>((resolve, reject) => {
-            Request.post({url: uri}, (err: Error, request: any, body: any) => {
-                
+        return new Promise<ISlackApiResponse>((resolve, reject) => {
+
+            Request.post({url: uri}, (err: Error, request: any, body: string) => {
+                               
                 if (err) {
                     reject(err);
                 }
                 
                 try {
-                    body = <ISlackApiResponse> JSON.parse(body);
-                    
-                    if (body.ok) {
-                        resolve(body);
+                    let response: ISlackApiResponse = <ISlackApiResponse> JSON.parse(body);
+                                                            
+                    if (response.ok) {
+                        resolve(response);
                     } else {
-                        reject(body);
+                        reject(new Error(response.error));
                     }
                 } catch (e) {                   
                     reject(e);

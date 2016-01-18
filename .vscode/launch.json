@@ -1,0 +1,22 @@
+{
+	"version": "0.2.0",
+	"configurations": [
+		{
+			"name": "Debug Tests",
+            "type": "node",
+            "request": "launch",
+            "program": "/usr/local/bin/gulp",
+            "args": ["test"],
+            "stopOnEntry": false,
+			"runtimeArgs": [
+				"--nolazy"
+			],
+			"env": {
+				"NODE_ENV": "development"
+			},
+			"externalConsole": false,
+			"sourceMaps": true,
+			"outDir": null
+		}
+	]
+}

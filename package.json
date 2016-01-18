@@ -30,6 +30,7 @@
     "del": "^2.2.0",
     "gulp": "^3.9.0",
     "gulp-jasmine": "^2.2.1",
+    "gulp-plumber": "^1.0.1",
     "gulp-tsd": "^0.1.0",
     "gulp-tslint": "^4.3.0",
     "gulp-typescript": "^2.10.0",

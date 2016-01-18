@@ -3,6 +3,7 @@ var ts = require('gulp-typescript');
 var del = require('del');
 var jasmine = require('gulp-jasmine');
 var typescript = require('typescript');
+var plumber = require('gulp-plumber');
 
 var Reporter = require('jasmine-spec-reporter');
 
@@ -55,7 +56,8 @@ gulp.task(tasks.build, [tasks.tsd, tasks.lint], function() {
         typescript: require('typescript')
     }); 
     
-	var tsResult = tsProject.src() 
+	var tsResult = tsProject.src()
+        .pipe(plumber())
 		.pipe(ts(tsProject));
 	
 	return tsResult.js.pipe(gulp.dest('bin'));
@@ -73,6 +75,7 @@ gulp.task(tasks.test, [tasks.build], function (done) {
     });
     
     return gulp.src(['bin/tests/*.spec.js', 'bin/tests/**/*.spec.js'])
+        .pipe(plumber())
         .pipe(jasmine({
 			reporter: reporter
     }));

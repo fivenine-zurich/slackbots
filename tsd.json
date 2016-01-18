@@ -12,16 +12,13 @@
       "commit": "d1f6bde13f2209be42e86c3686761e8bfcbb50a5"
     },
     "jasmine/jasmine.d.ts": {
-      "commit": "d1f6bde13f2209be42e86c3686761e8bfcbb50a5"
+      "commit": "70bf7e2bfeb0d5b1b651ef3219bcc65c8eec117e"
     },
     "form-data/form-data.d.ts": {
       "commit": "7577a2f4c134790891c52affdacdae99d802571b"
     },
     "request/request.d.ts": {
       "commit": "7577a2f4c134790891c52affdacdae99d802571b"
-    },
-    "es6-promise/es6-promise.d.ts": {
-      "commit": "138ad74b9e8e6c08af7633964962835add4c91e2"
     }
   }
 }
