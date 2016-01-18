@@ -23,7 +23,7 @@
     "url": "https://github.com/fiveninedigital/slackbots/issues"
   },
   "dependencies": {
-    "es6-promise": "^3.0.2",
+    "ts-promise": "^0.2.3",
     "ws": "^1.0.1"
   },
   "devDependencies": {

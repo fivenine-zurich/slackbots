@@ -1,7 +1,7 @@
 'use strict';
 
 export function that(condition: boolean, message: string) {
-    if(!condition) {
+    if (!condition) {
         throw new Error(`[slackbots error] ${message}`);
     }
 } 

@@ -1,7 +1,9 @@
 /// <reference path="../typings/tsd.d.ts" />
+/// <reference path="../node_modules/ts-promise/dist/ts-promise.d.ts" />
 
 import * as Ensure from './utils/ensure';
 import * as Request from 'request';
+import Promise from 'ts-promise';
 
 'use strict';
 
@@ -16,6 +18,12 @@ class SlackApiRequestData {
     public set methodName(v: string) {
         this._url = `https://slack.com/api/${v}`;
     }
+}
+
+export interface ISlackApiResponse {
+    ok: boolean;
+    
+    error?: string;
 }
 
 export default class SlackBots {
@@ -33,43 +41,46 @@ export default class SlackBots {
         this.name = name;
         
         Ensure.that(this.token !== undefined, 'The Slack API-Token is undefined');
-        
-        this.login();
     }
     
-    private login(): void {
-        this.callApi('rtm.start').then( (data: any) => {
+    public start(): Promise<ISlackApiResponse> {
+        return this.login();
+    }
+    
+    private login(): Promise<ISlackApiResponse> {
+        return new Promise<ISlackApiResponse>((resolve, reject) => {
             
-            console.log(data);
-            
-        }).catch((reason: any) => {
-            
-            console.error(reason);
-            
+            this.callApi('rtm.start').then((response) => {
+                
+                console.log('Respose recieved');
+                resolve(response);
+                
+            }).catch((err) => {
+                reject(err);
+            });
         });
     }
     
-    private callApi(methodName: string): Promise<any> {
+    private callApi(methodName: string): Promise<ISlackApiResponse> {
         
         let uri: string = 'https://slack.com/api/' + methodName;
         
-        return new Promise<any>((resolve: any, reject: any) => {
+        return new Promise<any>((resolve, reject) => {
             Request.post({url: uri}, (err: Error, request: any, body: any) => {
                 
                 if (err) {
                     reject(err);
-                    return false;
                 }
                 
                 try {
-                    body = JSON.parse(body);
+                    body = <ISlackApiResponse> JSON.parse(body);
                     
                     if (body.ok) {
                         resolve(body);
                     } else {
                         reject(body);
                     }
-                } catch (e) {
+                } catch (e) {                   
                     reject(e);
                 }
             });

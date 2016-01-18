@@ -31,7 +31,7 @@ var tasks = {
 gulp.task(tasks.defaultTask, [tasks.build] );
 
 gulp.task(tasks.tsd, function(callback) {
-    tsd({
+    return tsd({
         command: 'reinstall',
         config: './tsd.json'
     }, callback);
@@ -39,7 +39,7 @@ gulp.task(tasks.tsd, function(callback) {
 
 gulp.task(tasks.lint, function() {
     
-    gulp.src('src/**.ts')
+    return gulp.src('src/**.ts')
         .pipe(tslint())
         .pipe(tslint())
         .pipe(tslint.report(stylish, {
@@ -75,5 +75,5 @@ gulp.task(tasks.test, [tasks.build], function (done) {
     return gulp.src(['bin/tests/*.spec.js', 'bin/tests/**/*.spec.js'])
         .pipe(jasmine({
 			reporter: reporter
-		}));
+    }));
 });
