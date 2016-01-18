@@ -7,9 +7,8 @@
   "typings": "bin/slackbots",
   "scripts": {
     "build": "gulp build",
-    "test": "gulp build && gulp test",
-    "cover": "./node_modules/istanbul/lib/cli.js cover gulp --root ./bin -x ./bin/cover --include-all-sources --dir ./bin/cover/ -- test -R spec",
-    "travis": "gulp build && gulp test && ./node_modules/istanbul/lib/cli.js cover gulp -x gulpfile.js --include-all-sources --dir ./bin/cover/ -- test -R spec"
+    "test": "gulp test && ./node_modules/istanbul/lib/cli.js cover gulp -x gulpfile.js --include-all-sources --dir ./bin/coverage/ -- test -R spec",
+    "cover": "./node_modules/istanbul/lib/cli.js cover gulp -x gulpfile.js --include-all-sources --dir ./bin/coverage/ -- test -R spec"
   },
   "repository": {
     "type": "git",
