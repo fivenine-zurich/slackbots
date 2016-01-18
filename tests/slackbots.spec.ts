@@ -1,11 +1,13 @@
 'use strict';
 
 /// <reference path="../typings/tsd.d.ts" />
+/// <reference path="../typings/dotenv/dotenv.d.ts" />
 /// <reference path="../node_modules/ts-promise/dist/ts-promise.d.ts" />
 
 import {SlackBots, ISlackApiResponse} from '../src/slackbots';
 import Promise from 'ts-promise';
 import * as Request from 'request';
+import Dotenv = require('dotenv'); // Required as this is an old AMD/CommonJS module
 
 let failTest: any = function failTest(error: any): void {
     expect(error).toBeUndefined();
@@ -89,8 +91,29 @@ describe('API call tests', () => {
         bot.start()
             .then((result) => {
                 expect(result.ok);
+                bot.quit();
             })
             .catch(failTest())
             .finally(done);
     });
+});
+
+describe('Integration tests', () => {
+    var bot: SlackBots;
+    
+    Dotenv.load();
+    if (process.env.SLACK_API_KEY) {
+        it('Get login response', (done) => {
+        
+        bot = new SlackBots(process.env.SLACK_API_KEY, 'test-bot');
+        
+        bot.start()
+            .then((result) => {
+                expect(result.ok);
+                bot.quit();
+            })
+            .catch(failTest())
+            .finally(done);
+        });   
+    }
 });
