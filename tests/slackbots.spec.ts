@@ -101,7 +101,11 @@ describe('API call tests', () => {
 describe('Integration tests', () => {
     var bot: SlackBots;
     
-    Dotenv.load();
+    Dotenv.load(
+    {
+        silent: true
+    });
+    
     if (process.env.SLACK_API_KEY) {
         it('Get login response', (done) => {
         
